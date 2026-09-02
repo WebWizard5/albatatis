@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Details | Al Batatis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --purple-900:#26071f; --purple-800:#3a0e30; --gold:#f7b311; --gold-2:#ffcb3d; --cream:#fff6df; --cream-2:#fffaf0; --ink:#2c0a30; --wa-green:#25D366; --loc-red:#c9432f; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Poppins',sans-serif; color:var(--ink); background:var(--purple-900); display:flex; justify-content:center;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+  svg.icon{width:1em; height:1em; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; vertical-align:-0.15em;}
+  svg.icon.filled{fill:currentColor; stroke:none;}
+  .shell{width:100%; max-width:480px; min-height:100vh; background:#f7ae12;}
+
+  header{
+    background:linear-gradient(160deg, var(--purple-800), var(--purple-900)); padding:16px 20px 56px;
+    position:sticky; top:0; z-index:50; text-align:center;
+  }
+  header::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:36px; background:#f7ae12; border-radius:50% 50% 0 0/100% 100% 0 0;}
+  .back-btn{
+    position:absolute; top:16px; left:16px; z-index:51; width:38px; height:38px; border-radius:50%;
+    background:var(--gold); color:var(--purple-800); display:flex; align-items:center; justify-content:center;
+    font-size:19px; box-shadow:0 4px 10px -3px rgba(0,0,0,.5);
+  }
+  .page-title{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:30px; color:#fff; margin-top:12px;}
+  .page-sub{font-family:'Pacifico',cursive; color:var(--gold-2); font-size:15px; margin-top:2px;}
+
+  .avatar-wrap{position:relative; margin:-46px auto 0; width:104px; height:104px; z-index:60;}
+  .avatar{
+    width:104px; height:104px; border-radius:50%; background:var(--cream-2); border:5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center; font-size:42px; color:var(--purple-800);
+    box-shadow:0 10px 20px -6px rgba(0,0,0,.4); overflow:hidden;
+  }
+  .avatar img{width:100%; height:100%; object-fit:cover; display:none;}
+
+  main{padding:16px 20px 40px; text-align:center;}
+  .p-name{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:21px; color:var(--purple-800); margin-top:6px;}
+  .p-role{font-size:12px; color:#6b5a49; letter-spacing:.6px; text-transform:uppercase; font-weight:600; margin-top:2px;}
+  .p-bio{font-size:13px; color:#4a3a2c; line-height:1.65; margin-top:14px; text-align:left; background:var(--cream-2); border-radius:16px; padding:16px; box-shadow:0 8px 18px -10px rgba(0,0,0,.3);}
+
+  .info-card{
+    background:var(--cream-2); border-radius:16px; padding:15px 16px; display:flex; align-items:center; gap:14px;
+    margin-top:12px; text-align:left; box-shadow:0 8px 18px -10px rgba(0,0,0,.3);
+  }
+  .info-card .ic{width:42px; height:42px; border-radius:50%; background:var(--purple-800); color:#fff; display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0;}
+  .info-card .ic.ic-whatsapp{background:var(--wa-green);}
+  .info-card .ic.ic-location{background:var(--loc-red);}
+  .info-card .label{font-size:10px; text-transform:uppercase; letter-spacing:1px; color:#8a7a63; font-weight:700;}
+  .info-card .value{font-size:13.5px; font-weight:600; color:var(--ink); margin-top:2px;}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <a class="back-btn" href="index.html" aria-label="Back">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+    </a>
+    <div class="page-title">Owner Details</div>
+    <div class="page-sub">The face behind Al Batatis</div>
+  </header>
+
+  <div class="avatar-wrap">
+    <div class="avatar" id="avatarBox">
+      <!-- OWNER PHOTO: paste the image URL inside the src="" below -->
+      <img id="ownerImg" src="images/ownerimage.png" alt="Owner photo"
+           onload="this.style.display='block'; document.getElementById('avatarIcon').style.display='none';"
+           onerror="this.style.display='none'; document.getElementById('avatarIcon').style.display='flex';">
+      <svg class="icon" id="avatarIcon" viewBox="0 0 24 24" style="width:1em;height:1em;">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+      </svg>
+    </div>
+  </div>
+
+  <main>
+    <div class="p-name">Ali raza </div>
+    <div class="p-role">Founder &amp; Owner OF Al Batatis</div>
+
+    <div class="p-bio">
+      🍟 Al-Batatis | Chakwal
+Small Place. Big Taste. ❤️
+Fresh, flavorful & made with love. 🍔🍟
+👬 Proudly Run by 2 Brothers
+📍 Chakwal | 🛵 Online Delivery Available
+    </div>
+
+    <div class="info-card">
+      <span class="ic">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </span>
+      <div><div class="label">Owner Phone No</div><div class="value">+92 313 5959464</div></div>
+    </div>
+    <div class="info-card">
+      <span class="ic ic-whatsapp">
+        <svg class="icon filled" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2c-5.514 0-9.99 4.476-9.99 9.99 0 1.76.463 3.482 1.343 4.997L2 22l5.146-1.334a9.965 9.965 0 0 0 4.855 1.239h.004c5.514 0 9.99-4.476 9.99-9.99C22 6.476 17.524 2 12.001 2zm0 18.24h-.003a8.24 8.24 0 0 1-4.198-1.15l-.301-.179-3.11.808.83-3.03-.196-.311a8.235 8.235 0 0 1-1.264-4.388c0-4.55 3.706-8.25 8.25-8.25 2.203 0 4.276.858 5.834 2.417a8.196 8.196 0 0 1 2.416 5.833c0 4.55-3.705 8.25-8.258 8.25z"/></svg>
+      </span>
+      <div><div class="label">WhatsApp</div><div class="value"><a href="https://wa.me/923135959464" target="_blank" rel="noopener">Chat on WhatsApp</a></div></div>
+    </div>
+    <div class="info-card">
+      <span class="ic ic-location">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </span>
+      <div><div class="label">Location</div><div class="value"> Qasmi street chori Gali chappar Bazar chakwal, 48800</div></div>
+    </div>
+  </main>
+</div>
+
+<script>
+  /* Back button se page wapas aane par (bfcache restore) scroll/layout
+     kabhi kabhi freeze ho jata hai — ye script us hisse ko force-refresh
+     (reflow) kar deta hai taake scroll dobara chalne lage. */
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) {
+      document.body.style.display = 'none';
+      void document.body.offsetHeight;
+      document.body.style.display = '';
+    }
+  });
+
+</script>
+</body>
+</html>

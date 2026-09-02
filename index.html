@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al Batatis | Flavoured French Fries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<style>
+  :root{
+    --purple:#3a0e34;
+    --purple-deep:#2a0a26;
+    --gold:#f7b515;
+    --gold-2:#ffd23f;
+    --yellow-bg:#f5ab0d;
+    --cream:#fff6df;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    min-height:100%;
+    /* page ab poora content ke hisaab se scroll hoga */
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+  }
+  body{
+    font-family:'Poppins',sans-serif; color:var(--purple);
+    background:var(--purple-deep);
+    display:flex; justify-content:center;
+  }
+  a{text-decoration:none; color:inherit;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+
+  .shell{
+    width:100%; max-width:480px; min-height:100vh;
+    position:relative;
+    /* overflow:hidden hata diya + overflow-x hidden rakha taake horizontal scroll na aaye
+       lekin vertical scroll (page lamba hone par) chalta rahe */
+    overflow-x:hidden;
+    overflow-y:visible;
+    background:var(--yellow-bg);
+    display:flex; flex-direction:column;
+  }
+
+  /* faint repeating doodle texture, like the reference art */
+  .doodles{
+    position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.13;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%233a0e34' stroke-width='2'%3E%3Cpath d='M30 40h30l-4 30a4 4 0 0 1-4 4H38a4 4 0 0 1-4-4z'/%3E%3Cpath d='M36 40l3-14M45 40l0-16M54 40l3 14'/%3E%3Cpath d='M120 100c8-4 16-2 20 4M132 92c4-6 12-8 18-4'/%3E%3Cpath d='M100 110c-3 6 1 12 8 12s10-8 6-13'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:160px 160px;
+  }
+
+  .corner{position:absolute; width:130px; height:130px; z-index:0; pointer-events:none;}
+  .corner.tl{top:0; left:0; background:radial-gradient(circle at top left, var(--purple) 60%, transparent 61%);}
+  .corner.tl::after{content:""; position:absolute; top:18px; left:18px; width:130px; height:130px; border-radius:50%; border:1.5px solid rgba(247,181,21,.5); border-right:none; border-bottom:none;}
+  .corner.tr{top:0; right:0; background:radial-gradient(circle at top right, var(--purple) 60%, transparent 61%);}
+  .corner.tr::after{content:""; position:absolute; top:18px; right:18px; width:130px; height:130px; border-radius:50%; border:1.5px solid rgba(247,181,21,.5); border-left:none; border-bottom:none;}
+
+  .leaf{position:absolute; z-index:1; color:var(--purple); opacity:.55;}
+
+  main{position:relative; z-index:2; padding:26px 24px 0; text-align:center;}
+
+  .logo-mark{width:78%; max-width:300px; margin:0 auto; display:block;}
+
+  .welcome-block{margin-top:6px;}
+  .welcome-script{
+    font-family:'Pacifico',cursive; font-size:22px; color:var(--purple);
+    display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .welcome-script .dot{width:5px; height:5px; border-radius:50%; background:var(--purple); display:inline-block;}
+
+  .brand-name-big{font-family:'Pacifico',cursive; font-size:50px; line-height:1.05; margin-top:2px; color:var(--purple);}
+  .brand-name-big .stroke{display:block; height:3px; border-radius:3px; background:var(--purple); margin:0 auto; opacity:.85;}
+  .brand-name-big .row1{display:flex; justify-content:center;}
+  .stroke.s1{width:50px; margin-top:-4px;}
+  .stroke.s2{width:120px; margin-top:-6px;}
+
+  .ribbon{
+    display:inline-block; margin-top:14px; background:var(--purple); color:var(--cream);
+    font-family:'Baloo 2',sans-serif; font-weight:600; font-size:15px; letter-spacing:.3px;
+    padding:9px 24px; position:relative;
+    clip-path:polygon(2% 15%, 98% 0%, 100% 85%, 3% 100%);
+  }
+
+  .fries-visual{margin-top:14px;}
+  .fries-visual img{width:88%; max-width:340px; display:block; margin:0 auto;}
+
+  .nav-links{width:100%; max-width:400px; margin:14px auto 0; display:flex; flex-direction:column; gap:13px; text-align:left; position:relative; z-index:2; padding:0 24px;}
+  .nav-pill{
+    display:flex; align-items:stretch; background:var(--gold);
+    border-radius:999px; border:3px solid #fff; overflow:hidden;
+    box-shadow:0 10px 18px -10px rgba(0,0,0,.45);
+  }
+  .nav-pill .ic{
+    width:48px; height:48px; border-radius:50%; background:var(--purple); color:var(--gold-2);
+    display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;
+    margin:7px 0 7px 7px; overflow:hidden;
+  }
+  /* Bayi taraf ke gol icon ke andar image daalne ke liye:
+     display box hamesha 48x48 hai, image ise poora bhar degi aur circle mein crop ho jayegi. */
+  .nav-pill .ic img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .nav-pill .txt{flex:1; display:flex; flex-direction:column; justify-content:center; padding:6px 10px;}
+  .nav-pill .txt .t{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:15px; color:var(--purple); letter-spacing:.2px;}
+  .nav-pill .txt .s{font-size:10.5px; color:var(--purple); opacity:.85; margin-top:1px; font-weight:500; line-height:1.3;}
+  .nav-pill .capend{
+    width:52px; flex-shrink:0; background:var(--purple); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:19px;
+    overflow:hidden; position:relative;
+  }
+  /* Dayin taraf ke gol "end" hisse ke andar image daalne ke liye:
+     box 52px chaura hai, height poori pill jitni (approx 62px) — image us poori jagah ko bharegi. */
+  .nav-pill .capend img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+
+  .footer{
+    position:relative; z-index:2; margin-top:22px; background:var(--purple); color:var(--cream);
+    padding:22px 26px 28px; text-align:center;
+  }
+  .footer-follow-row{display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:10px;}
+  .footer-follow-row svg{width:60px; opacity:.7;}
+  .footer-follow{font-family:'Pacifico',cursive; font-size:15px; color:var(--gold-2);}
+  .social-row{display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px; flex-wrap:wrap;}
+  .social-row a{
+    width:30px; height:30px; border-radius:50%; background:var(--gold); color:var(--purple);
+    display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;
+    overflow:hidden;
+  }
+  /* Neeche follow-us wale gol social icons ke andar image daalne ke liye:
+     box 30x30 hai, image ise poora bhar degi aur circle mein crop ho jayegi. */
+  .social-row a img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .handle{font-size:12.5px; font-weight:600; letter-spacing:.3px; color:var(--cream);}
+  .wa-btn{
+    display:inline-flex; align-items:center; gap:8px; margin-top:6px; background:var(--gold);
+    color:var(--purple); font-weight:700; font-size:13.5px; padding:10px 22px; border-radius:999px;
+  }
+  .wa-btn i{font-size:16px; color:#22b04b;}
+
+  @media (max-width:360px){
+    .brand-name-big{font-size:42px;}
+    .logo-mark{width:88%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <div class="doodles"></div>
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <i class="ti ti-leaf leaf" style="top:150px; left:14px; font-size:20px; transform:rotate(-15deg);"></i>
+  <i class="ti ti-leaf leaf" style="top:210px; right:16px; font-size:18px; transform:rotate(20deg);"></i>
+  <i class="ti ti-leaf leaf" style="top:420px; left:12px; font-size:18px; transform:rotate(-25deg);"></i>
+  <i class="ti ti-leaf leaf" style="top:400px; right:20px; font-size:16px; transform:rotate(15deg);"></i>
+
+  <main>
+    <img class="logo-mark" src="images/logoalbatatis.png" alt="Al Batatis — Flavoured French Fries, By 2 Baaties">
+
+    <div class="welcome-block">
+      <div class="welcome-script"><span class="dot"></span>Welcome to<span class="dot"></span></div>
+      <div class="brand-name-big">
+        <div class="row1">Al Batatis</div>
+        <div style="display:flex; justify-content:center; gap:14px;">
+          <span class="stroke s1"></span><span class="stroke s2"></span>
+        </div>
+      </div>
+      <div class="ribbon">Browse the menu and place your order.</div>
+    </div>
+
+    <div class="fries-visual">
+      <img src="images/fries-cup.png" alt="Al Batatis loaded fries cup with dip">
+    </div>
+  </main>
+
+  <nav class="nav-links">
+    <a class="nav-pill" href="menu.html">
+      <span class="ic"><img src="images/menu.png" alt="Menu icon"></span>
+      <span class="txt"><span class="t">MENU</span><span class="s">Explore our delicious fries &amp; combos</span></span>
+      <span class="capend"><img src="images/allmenuend.png" alt=""></span>
+    </a>
+    <a class="nav-pill" href="owner.html">
+      <span class="ic"><img src="images/ownerimage.png" alt="Owner icon"></span>
+      <span class="txt"><span class="t">OWNER DETAILS</span><span class="s">Know more about our owner</span></span>
+      <span class="capend"><img src="images/allmenuend.png" alt=""></span>
+    </a>
+    <a class="nav-pill" href="developer.html">
+      <span class="ic"><img src="images/developer.png" alt="Developer icon"></span>
+      <span class="txt"><span class="t">DEVELOPER DETAILS</span><span class="s">App developed by our developer</span></span>
+      <span class="capend"><img src="images/allmenuend.png" alt=""></span>
+    </a>
+  </nav>
+
+  <div class="footer">
+    <div class="footer-follow-row">
+      <div class="footer-follow">Follow Us</div>
+    </div>
+    <div class="social-row">
+      
+      <a href="https://www.instagram.com/al.batatisoffical?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" aria-label="Instagram"><img src="images/instagram.png" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@al.batatisoffical?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" aria-label="TikTok"><img src="images/tiktok.png" alt="TikTok"></a>
+      <span class="handle">@albatatisofficial</span>
+    </div>
+    <a class="wa-btn" href="https://wa.me/923135959464" target="_blank" rel="noopener"><i class="ti ti-brand-whatsapp"></i> +92 313 5959464</a>
+  </div>
+</div>
+
+<script>
+  /* Back button se page wapas aane par (bfcache restore) scroll/layout
+     kabhi kabhi freeze ho jata hai — ye script us hisse ko force-refresh
+     (reflow) kar deta hai taake scroll dobara chalne lage. */
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) {
+      document.body.style.display = 'none';
+      void document.body.offsetHeight; /* reflow trigger */
+      document.body.style.display = '';
+    }
+  });
+</script>
+
+</body>
+</html>
